@@ -13,7 +13,7 @@ const RecipeList:React.FC = () => {
   },[]);
 
   return (
-    <div className='w-full flex flex-col items-center'>
+    <div className='w-full flex flex-col items-center mt-24'>
       {/* <HeroBanner /> */}
       <div className='w-full flex flex-col justify-center items-center mb-6 sm:px-10'>
           <h3 className='w-full flex justify-between items-center text-4xl font-semibold font-sans text-amber-700 mb-10'>Trending recipes

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import {signInUser, signUpUser } from '../api/authApi';
 import {User,SignupData, SignInData} from "../types/user.d";
 
@@ -14,6 +14,13 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
     const [user,setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
     
     const signUp = async(data: SignupData) => {
         try{
@@ -30,6 +37,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}
             const response = await signInUser(data);
             setUser(response?.user);
             localStorage.setItem('token',response?.token);
+            localStorage.setItem("user", JSON.stringify(response.user));
         } catch(err){
             throw err;
         }
@@ -38,6 +46,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}
     const logOut = () => {
         setUser(null);
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
     }
 
     return(
