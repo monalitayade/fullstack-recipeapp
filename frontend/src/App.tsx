@@ -18,19 +18,25 @@ function App() {
     <div className="App">
       {/* <Home /> */}
       <Router>
-        <Layout>
+       
+         
         <Routes>
-          {/* <Route path="/" element={<Start />} /> */}
-          <Route path="/" element={<Home />} />
-          <Route path="/recipe-listing" element={<RecipeList />} />
-          <Route path="/recipe-detail/:id" element={<RecipeDetail />} />
-          <Route path="/sign-in" element={<SignIn />}/>
-          <Route path="/sign-up" element={<SignUp />}/>
+           {/* Routes with layout and header */}
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/recipe-listing" element={<RecipeList />} />
+            <Route path="/recipe-detail/:id" element={<RecipeDetail />} />
+          </Route>
+
+          {/* Routes without layout/header */}
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          
+        
           {/* <Route path="/addfood" element={<AddFood />} />
-          <Route path="/updatefood/:id" element={<AddFood />} /> */}
-          {/* Add more routes as needed */}
+          <Route path="/updatefood/:id" element={<AddFood />} />  */}
         </Routes>
-        </Layout>
+       
       </Router>
       
     </div>

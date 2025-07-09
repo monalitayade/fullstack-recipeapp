@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 const SignIn:React.FC = () => {
     const { signIn } = useAuth();
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         email:'',            
@@ -23,7 +24,7 @@ const SignIn:React.FC = () => {
                     password:formData.pwd
                 });
                 alert("Login successful");
-    
+                navigate('/');
             } catch(err:any){
                 console.log(err);
                 alert("Login Failed");
