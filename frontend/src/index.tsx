@@ -7,18 +7,22 @@ import reportWebVitals from './reportWebVitals';
 import { RecipeListProvider } from './context/RecipeContext';
 import { RecipeDetailProvider } from './context/RecipeDetailContext';
 import { AuthProvider } from './context/AuthContext';
+import { RecipeSetterProvider } from './context/AddRecipeContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <AuthProvider>
-    <RecipeListProvider>
-      <RecipeDetailProvider>
-        <App />
-      </RecipeDetailProvider>
-    </RecipeListProvider>
+      <RecipeSetterProvider>
+        <RecipeListProvider>
+          <RecipeDetailProvider>
+            <App />
+          </RecipeDetailProvider>
+        </RecipeListProvider>
+      </RecipeSetterProvider>
     </AuthProvider>
   </React.StrictMode>
 );

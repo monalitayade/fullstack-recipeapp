@@ -3,22 +3,27 @@ import { getRecipeDetail } from '../api/recipeApi';
 import { useParams } from 'react-router-dom';
 import { useRecipeDetail } from '../context/RecipeDetailContext';
 import StarRating from '../components/StarRating';
+import TrendingGrid from '../components/TrendingGrid';
+import { useRecipeList } from '../context/RecipeContext';
 
 const RecipeDetail:React.FC = ()  => {
    
     const {recipeDetail, fetchRecipeDetail} = useRecipeDetail();
+    const {trendingRecipes, fetchTrendingRecipes} = useRecipeList();
     const { id } = useParams<{ id: string }>();
+
     useEffect(() => {
         if(id && fetchRecipeDetail) {
             fetchRecipeDetail(Number(id));
         }
-    },[id])
+    },[id]);
 
-    console.log("22",recipeDetail);
-
+    useEffect(() => {
+        fetchTrendingRecipes();
+    },[])
 
     return(
-        <div className='w-full flex flex-col items-center justify-center px-4 mt-24'>
+        <div className='w-full flex flex-col items-start justify-center px-4 mt-24'>
             <div className='w-full flex flex-col py-2 border-b border-gray-200'>
                 <h1 className='w-full font-sans font-semibold text-4xl text-left sm:text-2xl'>{recipeDetail?.recipe_name}</h1>
                 <div className='w-full flex items-center justify-start my-4'>
@@ -118,8 +123,8 @@ const RecipeDetail:React.FC = ()  => {
                     </div>
                 </div> */}
             </div>
-            <div className='w-full flex items-center justify-center my-10 tablet:flex-col'>
-                <div className='w-3/5 flex flex-col sm:w-1/2 tablet:w-full tablet:px-5'>
+            <div className='w-full flex items-start justify-center my-10 tablet:flex-col'>
+                <div className='w-3/5 flex flex-col  tablet:w-full tablet:px-5'>
                     <div className='w-full'>
                         <img src="/images/food-detail.png" className='w-full' alt="Recipe Detail" />
                     </div>
@@ -150,8 +155,18 @@ const RecipeDetail:React.FC = ()  => {
                         
                     </div>
                 </div>
-                <div className='w-2/5 sm:w-1/2 px-8'>
-                    <h3>Trending</h3>
+                <div className='w-2/5 px-8'>
+                   <h1 className="w-auto text-3xl font-semibold font-sans text-amber-900 leading-7 mb-4 sm:text-2xl sm:mb-3 sm:leading-5">Trending Recipe</h1>
+                   <div className='w-full flex flex-col h-[385px] overflow-y-auto'>
+                    {
+                        trendingRecipes.slice(0,3)?.map((trendingBlock, t) => {
+                            return(
+                                <TrendingGrid recipeList={trendingBlock} variant="home"/>
+                            )
+                        })
+                    }
+                    </div>
+                   
                 </div>
             </div>
         </div>

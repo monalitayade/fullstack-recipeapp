@@ -13,9 +13,9 @@ const Food = {
             console.error("DB Error:", err);
             throw err;
         }
-    },
-    create: async ({ name,calories}) => {
-        const res = await pool.query('insert into recipe_listing (name, calories) values ($1, $2) returning *', [name,calories]);
+    },   
+    create: async ({ recipe_name,recipe_rate,author_name,calories,category,prep_time,people_count,ingredients,steps}) => {
+        const res = await pool.query('insert into recipes_list (recipe_name,recipe_rate,author_name,calories,category,prep_time,people_count,ingredients,steps) values ($1, $2, $3, $4,$5, $6, $7, $8, $9) returning *', [recipe_name,recipe_rate,author_name,calories,category,prep_time,people_count,ingredients,steps]);
         return res.rows[0];
     },
     update: async(id, {name, calories}) => {

@@ -25,11 +25,11 @@ exports.getRecipeById = async(req, res) => {
 
 exports.createfood = async(req, res) => {
     try {
-        const {name, calories} = req.body;
-        if((!name || !calories) || typeof calories != 'number' || calories < 0 || typeof name !='string' || name.trim() === '') {
-            return res.status(400).json({error: 'Invalid inpuit data'});
+        const {recipe_name,recipe_rate,author_name,calories,category,prep_time,people_count,ingredients,steps} = req.body;
+        if((!recipe_name || !calories) || typeof calories != 'number' || calories < 0 || typeof recipe_name !='string' || recipe_name.trim() === '' || typeof recipe_rate != 'number' || typeof category != 'string') {
+            return res.status(400).json({error: 'Invalid input data'});
         }
-        const newFood = await Food.create({name, calories});
+        const newFood = await Food.create({recipe_name,recipe_rate,author_name,calories,category,prep_time,people_count,ingredients,steps});
         res.status(201).json({success: 'Food created successfully', food: newFood});
         
     } catch (err) {

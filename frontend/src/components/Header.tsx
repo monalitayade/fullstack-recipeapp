@@ -38,11 +38,7 @@ const Header:React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);       
     },[]);
 
-    // useEffect(() => {
-    //     if(!user) {
-    //         navigate("/sign-in")
-    //     }
-    // },[user])
+   
 
     return(
         <header className={`max-w-screen-2xl sm:max-w-screen-xl sm:px-10 mx-auto w-full flex justify-between items-center p-4 tablet:p-2 bg-transparent text-white fixed top-0 z-[1] transition-all duration-300 ${isScrolled ? `bg-white shadow-md` : `bg-transparent`} ${animate ? `animate-slideDown` : ''}`}>
@@ -61,7 +57,7 @@ const Header:React.FC = () => {
                 <ul className='flex gap-4 '>
                     <li className='mx-6'><a href="/" className='hover:underline'>Home</a></li>
                     <li className='mx-6'><a href="/recipe-listing" className='hover:underline'>Recipes</a></li>
-                    <li className='mx-6'><a href="/home" className='hover:underline'>Add Recipe</a></li>                    
+                    <li className='mx-6'><a href="/add-recipe" className='hover:underline'>Add Recipe</a></li>                    
                 </ul>
             </nav>
             <div className='w-auto relative'>
@@ -91,13 +87,13 @@ const Header:React.FC = () => {
                         <button className='w-11 h-11 flex' onClick={() => setIsOpen(!isOpen)}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#92400e" className="size-10">
                         <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
                         </svg></button>
-                    <a href="/home" onClick={() => setIsOpen(false)} className="text-amber-800 font-semibold">
+                    <a href="/" onClick={() => setIsOpen(false)} className="text-amber-800 font-semibold">
                         Home
                     </a>
-                    <a href="/recipes" onClick={() => setIsOpen(false)} className="text-amber-800 font-semibold">
+                    <a href="/recipe-listing" onClick={() => setIsOpen(false)} className="text-amber-800 font-semibold">
                         Recipes
                     </a>
-                    <a href="/add" onClick={() => setIsOpen(false)} className="text-amber-800 font-semibold">
+                    <a href="/add-recipe" onClick={() => setIsOpen(false)} className="text-amber-800 font-semibold">
                         Add Recipe
                     </a>
                     </div>

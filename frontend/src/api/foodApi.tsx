@@ -1,23 +1,27 @@
 import { Food } from "../types/food.d";
 import { Recipe } from "../types/recipe.d";
 console.log(process.env.REACT_APP_API_FOODS_URL)
-const API_URL = process.env.REACT_APP_API_FOODS_URL || 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_FOODS_URL || 'http://localhost:5000/api/foods';
 const RECIPE_DETAIL_URL = process.env.REACT_APP_API_RECIPE_DETAIL_URL || 'http://localhost:5000/api/recipe';
 
+//for recipe listing
 export async function getFoods(): Promise<Food[]> {
     const res = await fetch(API_URL);
     
     if(!res.ok) throw new Error('Failed to fetch data');
     return res.json();
 };
+//for recipe detail based on id
 export async function getRecipeDetail(id:number): Promise<Recipe> {
     const res = await fetch(`${API_URL}/recipe/${id}`);
 
     if(!res.ok) throw new Error('Failed to fetch data');
     return res.json();    
 }
+
+//for add recipe
 export async function addFood(food: Omit<Food,'id'>): Promise<Food> {
-    const res = await fetch(`${API_URL}/create`, {
+    const res = await fetch(`${API_URL}/create-recipe`, {
         method:'POST',
         headers: {
             'content-type' :'application/json'},

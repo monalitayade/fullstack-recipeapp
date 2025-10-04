@@ -7,6 +7,7 @@ import Home from './pages/home';
 import Layout from './components/Layout';
 import RecipeDetail from './pages/recipedetail';
 import RecipeList from './pages/recipelist';
+import AddRecipe from './pages/AddRecipe';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 // import Search from './pages/Search';
@@ -26,6 +27,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/recipe-listing" element={<RecipeList />} />
             <Route path="/recipe-detail/:id" element={<RecipeDetail />} />
+            <Route path="/add-recipe" element={<AddRecipe />} />
           </Route>
 
           {/* Routes without layout/header */}
